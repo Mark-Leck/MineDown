@@ -3,7 +3,8 @@ and (once configured) will send an SMS Text message to alert you of a problem wi
 (please see below for install instructions).
 
 Simply head on over to www.Twilio.com and sign up for a 'free' Twilio account and then run the 
-MineDown GUI setup to configure the cgminer watchdog.
+MineDown GUI 'step by step' setup to configure the cgminer watchdog. 
+(I suggest you have your browser open on your Twilio accounts page during the initial setup process as links are provided)
 
 Any requests, ideas or suggestions then please get in touch!
 
@@ -26,9 +27,13 @@ For now anyone wishing to try this I suggest you use the following in a terminal
 (copy and paste the following)
 
 cd /usr/bin
+
 sudo su
+
 wget https://raw.github.com/Mark-Leck/MineDown/master/minedown
+
 chmod +x minedown
+
 minedown
 
 Note: this has only been tested on Ubunto 12.10 and the cgminer-2.10.5-x86_64-built version of cgminer, 
