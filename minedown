@@ -1,0 +1,287 @@
+#!/bin/bash
+#MineDown by Mark Leck
+#A Lightweight GUI front-end watchdog with SMS alert for cgminer
+
+VERSION=11022013
+clear all
+if [ $(id -u) -ne 0 ]; then
+ printf "Script must be run as root. Try 'sudo minedown' \n"
+  exit 1
+fi
+
+if [ ! -f /bin/whiptail ] 
+ then
+clear all
+echo "####################################################################"
+sleep 1
+echo "######## First we need to install a couple of dependencies #########"
+sleep 1
+echo "#### Please make sure that you have a valid internet connection! ###"
+sleep 1
+echo "####################################################################"
+sleep 2
+ apt-get update
+ apt-get -y install whiptail
+ fi
+if [ ! -f /usr/bin/curl ]; then
+apt-get update
+apt-get -y install curl 
+
+ fi
+if [ ! -f /usr/bin/php5 ]; then
+apt-get update
+apt-get -y install php5-cli 
+
+ fi
+
+
+do_Readme() {
+whiptail --msgbox "MineDown is a lightweight GUI front-end watchdog for cgminer, it utilises both the cgminer API & the Twilio SMS API and (once configured) will send an SMS Text message to alert you of a problem with your miner.
+
+Simply head on over to www.Twilio.com and sign up for a free Twilio account and then run the MineDown setup to configure the cgminer watchdog.
+
+Any requests, ideas or suggestions then please get in touch!
+
+That's it!
+
+Enjoy!
+
+MineDown by Mark Leck
+Email: Mark@juicypi.com
+Donate:
+BTC = 1AmYBJ9vzeTWJebrg8wkh8sRh7Rc2TvgyB
+LTC = LhcW62pTvAudYSxsAfGRDwGSJEJj1dummG " 30 60 20
+}
+
+do_About() {
+whiptail --msgbox "MineDown by Mark Leck
+
+V.$VERSION" 10 15 20
+}
+
+do_MineDown() {
+clear all
+if [ ! -f /bin/.minedown.conf ]; then
+do_Setup
+else
+do_watchdog
+fi
+}
+
+do_Setup() {
+if [ -f /bin/.minedown.conf ]; then
+do_yousure
+else
+do_wizard
+fi
+}
+
+do_yousure() {
+whiptail --yesno "A MineDown configuration file has been found, if you continue all current MineDown data WILL be lost! \n
+
+Do you still wish to Continue? " 20 60 20
+
+if [ $? -eq 0 ]; then
+do_wizard
+else
+whiptail --msgbox "No MineDown configuration data has been altered!
+
+Choose OK to return to Setup menu..." 20 60 20
+fi
+}
+
+do_wizard() {
+if [ -f /bin/.minedown.conf ]; then
+rm -f /bin/.minedown.conf
+fi
+whiptail --msgbox "We will now configure the default settings for MineDown \n PLEASE NOTE: A Twilio account is required, this can be obtained for FREE @ http://www.twilio.com/try-twilio" 20 60 20
+
+    while (true); do
+ACCOUNT=$(whiptail --inputbox "Please Enter Your Account SID number below: (This can be found in your account Dashboard page @ www.twilio.com/user/account)" 20 60 3>&1 1>&2 2>&3)
+
+if [ $? -eq 0 ]; then
+account="$ACCOUNT"
+fi
+
+TOKEN=$(whiptail --inputbox "Please Enter your Authority Token below: (This can be found in your account Dashboard page @ www.twilio.com/user/account)" 20 60 3>&1 1>&2 2>&3)
+if [ $? -eq 0 ]; then
+token="$TOKEN"
+fi
+
+FROM=$(whiptail --inputbox "Please Enter Your Twilio Phone Number below: (This can be found in your account Numbers page @ www.twilio.com/user/account)" 20 60 3>&1 1>&2 2>&3)
+if [ $? -eq 0 ]; then
+from="$FROM"
+fi
+
+TO=$(whiptail --inputbox "Please Enter the mobile number you would like the alerts sent to...: 
+
+NOTE: If using a FREE Twilio account this 'HAS' to be the Mobile number that you registered with!!) " 20 60 3>&1 1>&2 2>&3)
+
+if [ $? -eq 0 ]; then
+to="$TO"
+fi
+
+LOCATION=$(whiptail --inputbox "Please Enter the 'full' directory path to cgminer: 
+
+Eg: /path/to/cgminer/location/) " 20 60 3>&1 1>&2 2>&3)
+
+if [ $? -eq 0 ]; then
+location="$LOCATION"
+fi
+
+THRESHOLD=$(whiptail --inputbox "Please Enter Your U: Utility threshold: 
+
+This will be the watchdogs main fail trigger...
+
+Eg: If you currently average U:100/m then enter 90 to allow for slight dips, should the watchdog sense a sudden drop below this setting then an SMS
+warning message will be sent automatically!" 20 60 3>&1 1>&2 2>&3)
+
+if [ $? -eq 0 ]; then
+threshold="$THRESHOLD"
+fi
+
+
+
+
+whiptail --yesno "Your Account SID Number is: "$account"
+
+Your Authority Token is: "$token"
+
+Your Twilio Phone Number Is: "$from"
+
+The Mobile you wish to alert is: "$to"
+
+The location of cgminer is: "$location"
+
+Your Utility threshold is: "$threshold"
+
+Is This Correct?..." 25 60 20
+        if [ $? -eq 0 ]; then
+            break;
+        fi
+
+    done
+
+if [ -n "$account" ] && [ -n "$token" ] && [ -n "$from" ] && [ -n "$to" ] && [ -n "$location" ] && [ -n "$threshold" ]; then
+touch /bin/.minedown.conf
+echo "from=$from" > /bin/.minedown.conf
+echo "account=$account" >> /bin/.minedown.conf
+echo "token=$token" >> /bin/.minedown.conf
+echo "to=$to" >> /bin/.minedown.conf
+echo "message=MineDown!!MineDown!!MineDown!!" >> /bin/.minedown.conf
+echo "location=$location" >> /bin/.minedown.conf
+echo "threshold=$threshold" >> /bin/.minedown.conf 
+whiptail --msgbox "All done, MineDown is now configured and ready to use!
+
+Please select MineDown from the main menu to start the watchdog..." 20 60 20
+
+else
+whiptail --msgbox "Whoops! Some input fields were left empty, please run setup again to complete the MineDown configuration... " 20 60 20
+fi
+}
+
+do_watchdog() {
+. /bin/.cgsettings.conf
+whiptail --yesno "Start cgminer with the following settings?:
+
+$settings " 20 60 20
+if [ $? -eq 0 ]; then
+do_startwatchdog
+else
+do_ammendcgstart
+fi
+}
+
+do_ammendcgstart() {
+SETTINGS=$(whiptail --inputbox "Please Enter your cgminer start settings below: 
+
+(Eg: --scrypt --intensity, etc, etc)
+
+or Choose OK to CONTINUE..." 20 60 3>&1 1>&2 2>&3)
+
+if [ $? -eq 0 ]; then
+settings=$SETTINGS
+echo "settings=\"$settings\"" > /bin/.cgsettings.conf
+do_startwatchdog
+fi
+}
+
+do_startwatchdog() {
+clear all
+export GPU_MAX_ALLOC_PERCENT=100
+. /bin/.minedown.conf
+cd $location
+if [ ! -f $location/api-example.php ]; then
+do_noapi
+else
+do_startminer
+fi
+}
+
+do_noapi() {
+whiptail --msgbox "ERROR!! api-example.php not found!!
+
+NOTE: api-example.php is required and must be located in the same folder as cgminer!!" 20 60 20
+}
+do_startminer() {
+gnome-terminal -e "./cgminer $settings --api-listen" & 
+sleep 10
+while (true); do
+response=$(php api-example.php > /tmp/cgtmp.log )
+if [ $? -eq 0 ]; then
+echo "Watchdog OK"
+clear all
+do_grep
+else
+do_error
+break;
+fi
+done
+}
+
+do_grep() {
+Utility=$(grep --only-matching --perl-regex "(?<=Work Utility\=).." /tmp/cgtmp.log)
+if [ "$Utility" -gt "$threshold" ]; then
+echo "Watchdog OK"
+clear all
+else
+echo "Watchdog: Utility below set threshold - WatchDog triggered" > /tmp/minedown.log
+watchdog="Utility below set threshold - WatchDog triggered" 
+do_error
+break;
+fi
+}
+
+do_error() {
+crl=$(curl -fSs -X POST "https://api.twilio.com/2010-04-01/Accounts/$account/SMS/Messages.xml" \
+-d "From=$from" \
+-d "To=$to" \
+-d "Body=$message" \
+-u $account:$token )
+clear all
+whiptail --msgbox "MineDown!!MineDown!!MineDown!!
+
+$watchdog 
+
+$response" 20 60 20
+
+echo "php: $response" >> /tmp/minedown.log
+echo "curl: $crl" >> /tmp/minedown.log
+break;
+}
+
+
+while true; do
+  CONFIG=$(whiptail --menu "                          ******** MineDown ********" 20 80 12 --cancel-button Finish --ok-button Select \
+        "Readme" "" \
+        "MineDown" "" \
+        "Setup" "" \
+        "About" "" \
+        3>&1 1>&2 2>&3)
+  RET=$?
+  if [ $RET -eq 0 ]; then
+        "do_$CONFIG" || whiptail --msgbox "There was an error running do_$CONFIG" 20 60 1
+  else
+        exit 1
+  fi
+done
