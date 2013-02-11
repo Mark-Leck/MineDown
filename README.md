@@ -36,7 +36,7 @@ chmod +x minedown
 
 minedown
 
-Note: this has only been tested on Ubunto 12.10 and the cgminer-2.10.5-x86_64-built version of cgminer, 
+Note: this has only been tested on Ubuntu 12.10 and the cgminer-2.10.5-x86_64-built version of cgminer, 
 but should work with any versions containing the api-example.php (this 'MUST' be located in the same folder as cgminer)
 
 
