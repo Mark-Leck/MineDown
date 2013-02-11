@@ -10,7 +10,11 @@ That's it!
 Enjoy!
 
 MineDown by Mark Leck
+
 Email: Mark@juicypi.com
+
 Donate:
+
 BTC = 1AmYBJ9vzeTWJebrg8wkh8sRh7Rc2TvgyB
+
 LTC = LhcW62pTvAudYSxsAfGRDwGSJEJj1dummG 
