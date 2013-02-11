@@ -9,8 +9,6 @@ That's it!
 
 Enjoy!
 
-MineDown by Mark Leck
-
 Email: Mark@juicypi.com
 
 Donate:
