@@ -1,3 +1,7 @@
+Version-13022013 - Fixed issue where cgniner start settings were not being saved correctly
+Also increased the delay between cgminer start & watchdog start to 60sec from 10sec - this
+gives cgminer time to get up & running to full potential and avoids unecessary false alarm triggers.
+
 Standalone installer now added.
 
 Version-12022013 - Fixed some minor bugs affecting new installs when no
