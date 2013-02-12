@@ -2,7 +2,7 @@
 #MineDown by Mark Leck
 #A Lightweight GUI front-end watchdog with SMS alert for cgminer
 
-VERSION=12022013
+VERSION=13022013
 clear all
 if [ $(id -u) -ne 0 ]; then
  printf "Script must be run as root. Try 'sudo minedown' \n"
