@@ -181,7 +181,7 @@ fi
 }
 
 do_watchdog() {
-if [ ! -f . /bin/.cgsettings.conf ];then
+if [ ! -f /bin/.cgsettings.conf ]; then
 do_ammendcgstart
 else
 do_watchdog2
