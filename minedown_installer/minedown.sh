@@ -1,15 +1,15 @@
 #!/bin/sh
 # This script was generated using Makeself 2.1.5
 
-CRCsum="4206828480"
-MD5="d6a4756090cb975201dda7debc99bc45"
+CRCsum="2692784182"
+MD5="b504d10c013206a2f3db73ec5e14b5b4"
 TMPROOT=${TMPDIR:=/tmp}
 
 label="MineDown Installer"
 script="./minedown.setup"
 scriptargs=""
-targetdir="minedown"
-filesizes="3078"
+targetdir="minedown_installer"
+filesizes="3335"
 keep=n
 
 print_cmd_arg=""
@@ -156,13 +156,13 @@ do
     --info)
 	echo Identification: "$label"
 	echo Target directory: "$targetdir"
-	echo Uncompressed size: 16 KB
+	echo Uncompressed size: 12 KB
 	echo Compression: gzip
-	echo Date of packaging: Tue Feb 12 10:00:08 GMT 2013
+	echo Date of packaging: Tue Feb 12 22:08:28 GMT 2013
 	echo Built with Makeself version 2.1.5 on 
 	echo Build command was: "/usr/bin/makeself.sh \\
     \"--gzip\" \\
-    \"/home/mark/minedown/\" \\
+    \"/home/mark/minedown_installer/\" \\
     \"minedown.sh\" \\
     \"MineDown Installer\" \\
     \"./minedown.setup\""
@@ -184,13 +184,13 @@ do
 	echo LABEL=\"$label\"
 	echo SCRIPT=\"$script\"
 	echo SCRIPTARGS=\"$scriptargs\"
-	echo archdirname=\"minedown\"
+	echo archdirname=\"minedown_installer\"
 	echo KEEP=n
 	echo COMPRESS=gzip
 	echo filesizes=\"$filesizes\"
 	echo CRCsum=\"$CRCsum\"
 	echo MD5sum=\"$MD5\"
-	echo OLDUSIZE=16
+	echo OLDUSIZE=12
 	echo OLDSKIP=403
 	exit 0
 	;;
@@ -341,7 +341,7 @@ fi
 offset=`head -n 402 "$0" | wc -c | tr -d " "`
 
 if test x"$verbose" = xy; then
-	MS_Printf "About to extract 16 KB in $tmpdir ... Proceed ? [Y/n] "
+	MS_Printf "About to extract 12 KB in $tmpdir ... Proceed ? [Y/n] "
 	read yn
 	if test x"$yn" = xn; then
 		eval $finish; exit 1
@@ -355,9 +355,9 @@ if test "$keep" = n; then
 fi
 
 leftspace=`MS_diskspace $tmpdir`
-if test $leftspace -lt 16; then
+if test $leftspace -lt 12; then
     echo
-    echo "Not enough space left in "`dirname $tmpdir`" ($leftspace KB) to decompress $0 (16 KB)" >&2
+    echo "Not enough space left in "`dirname $tmpdir`" ($leftspace KB) to decompress $0 (12 KB)" >&2
     if test "$keep" = n; then
         echo "Consider setting TMPDIR to a directory with more free space."
    fi
@@ -400,19 +400,20 @@ if test "$keep" = n; then
     /bin/rm -rf $tmpdir
 fi
 eval $finish; exit $res
-‹ ¨QíZësÚÆ÷gýÅãÇ½ ;-½NBlâ:ñk ×Í\w2BZjI«J«`z›ÿýž}	Á6ÍLgt>³:»{Þû;+êµ¿šH/wwù§ýr·YþÔ´f·ìæÞÛníØ8þrÃîÚ7 <cN
-°9éÍ}|=ÿ‡R½1ñè$þ{ý¿÷â…ö÷Â§½gï¼Ðþoîr>Û~±»·Íoéÿ”RvßCÏÿ¡ô¬Öqcèd¾ñìCáC†S8Åx‡âÞÏ:pŒ}6!ü/]Ã(¥1³HìÁÄa®ïÑ1LæCÿ´NHR#š‚;æ±•ÆOÝ^ÿøülßn5[­¦½c¸!A£;ah#ø/¬oXù6X1&üò0ŸÄ$i³˜}7ú
-†Ò<'î‘:Ò)lf¹GAò&\Ç¦@n¶1
-¹K¬m'>.ç!ü†Üj&q}
-æ³¯@¦‘…„$(Âüšð.HQ‘	˜… Æ CpÀ¥y #ðH‚ö%±î].PøŒ@äÜÈò” Jƒ)ÍÁw>\õ³¢Ñ–$	ÃMâ˜¸, qî‘ókèÞ2ÀI˜5Æ]óÄs™}·¦…ÞÚ ³J¾Ê³TøËÍÓ°ˆŠ…õ–,'ØU‹%~²û„Å8»å†ZÐ0<ú©G/"[Ûð?£%ËŠ²ñÞ‚YdQ¡íÃ‡S§”+Ïc6gAdèö!ÅœB9õSè\Ã†L‡Š„ãƒ®·Ec—pçŽ‚1F·9‰
-d|/'¬r‹iD²Ìx2Wy¤`Ä9˜ot’Hæ2Ž¦"§Òºaôƒ(	§à£â@c ŸQœ?™LêR’ºK#!EŒc4§PÊAmI!«ãbtÇLpqã‹<æºËÃ™¸n¡ÄœöÚ`(O'žBJ~ËIÆ2´™‡	 ¸a–Ç8„‘É-™Ü§nFs×¯Æ óc3CSãÿÝøW:ÅÏåµ¯¡oÛbàÍ¯yàN“€kjÒã¥m¼À>ØèãÛ÷ßþ®Þ“a:þnrã—õü—=·5ø<ž¾5Nã‰ï^íµ’ÁçNî}ìßfÑQïprÔß}ÿ«íåQt&ì4a¯	­¦ñE[gHsö`¬ÍImüT_W5×»	öîl9=C¬¸P‡g²®‹i»¢Hœßç>2H˜þM»„WY¹¾x.K>¼ Æ/Z³%ƒßÔ›-¨ž/Z`J²‹Ug=:hîÌU¬£>†Å`Œ0ò<”‘vädAœPÕ"%–Å:X	¸:>9ágMH3VÃÅ@—‹¹]¼b™Ïõ@­ôýÖÒ~S‡Úk°Èo¥ãl¦›Pu‰7Ïè*m„L…6Nˆ•œxµ>¥ßç¸0)š>åQÂ	˜èq^¯×K’F•‚<ÚMi´‚ƒ¯¸D‘+"kOL'¹ì‘‘“‡Œ§:nœ‰:Q(}ÃÅI·ÓïÂÙù Û†ÎbíÀ’ÊÓ>@íŸãzøÕÅÒ†~¢Cë½ëu»ð|Æ’v£Á‹+ŠTƒ¥SK~-»PŒ™-–ædûð¨Ñ988¿<ì¯o•tâ$gBKuîvù¹
-y¹ì(1ûÇ‡çÑÇ‡$¤“6lJÂŠhäIÔX­Û!b°!E·@ÂËóX<ÏHÚPÌÛZöW6Ø¯6ZÐzµ±³½*öÔ´}s]éd
-\48ÿÐ={”zBÒNÎ|šl
-zCâo­ÛrÕºHµÞõÎOï4b>EôyöT¯É	Ù××B„jq]´³¥Ï²ˆy(«äekBóÐC0r#ÓPüÇë‰6â™sÇ#È3LM<½E-d HºÍ;ýM^h†r¹Ó¹ý
-ø™’q‰R% E­¶OŒ[F…g¥NÎ:ÞG<Ö›£<7ÁÃrá2ŠBâ0Q¶¢àJwÇmhðñ£5Þ©+ênãÉë™(¶WyïÇ^·ÿãùÉáãó²—
-b¾1?%™OC‹,‚RÔWe~}
-gØ`|ŽøÒ,¥èZ©ã±:úäi‡X[ƒ”ÇìeÛn6‘ÄKDìþ}S‚CÌQO3bÑŽ	‚-ƒ‡Ry_Go4°Ã–¼”&2…d¸¨b/·PÔ˜8iÌÇ4ÕúˆtrF#´£‹2LkOm+:ÚêÒ	Hw!ÄÊ­j@µÁ\WqoÆÇe%P2‰¤Y–Õ“cÁÆSÚäþ+2F¤¦ÂŒëŸŽ'Ð5–,ú‰ÞöN¨è¥ôwd<Î@ÏMyJ¼–è`W‚ h¹Y¡DÃ”87?CÜ´üÓC•W¬¸d;ì³76ô ´ÕÜ°ËÓü÷BÙy®BµRÁ@ˆ¿©ÈæVTUµá«{øô9ÓáÕ}ìòÒº=Àº/Ô»—IeÅ¾FFµÚ²ÿX¤¨E%óÝ/Z‘9eÓ.ŸËp_s˜Ás(7Ás(ÐýÆ7åA$ÂXUû2bTÎær7ÉóŒ—5gù~aÇæêÏ<È]	¯¯,'Yú4" 
-/F.	=,¦xFAHFH”°ésÝ7òU6¥ÎØ$*‚0ad¾sCë(,ÝJÜì.5\îXCâ;’¡ê2pÅï´^­»´V4K}a¹¢ÔíÂˆòJÏ‹±áuÛ0Öˆ^Òeeg#d+ºA-ã¼ä…œsÃBÖ~w08>;ê?‹j-d4²*àf[üÐ³¬ÌM§	k1<¤î\Â\ñO<ÜæZ¨ƒó3”ã²[Š¨Gž:Z‚ýu­‹JªâÁµY˜ôÚœUŸÇß5fa¶¹á…þÜ&íptqùé´óó§Î	¢OÝÞAû<àúÒ¼w=(ŠC)$‹±†“¹uxÌ×?)»<¦ø°pµNÞ÷ŽUWÝ^ï¼W«Áâ1ej×j’.²”º@QMôÅ°šŒÎã:s"Ü†	¶Î*bjµR<™]È:Ž±>Xh8ä ÄÌºF†0Ë
-Ëâb…àb]Ý }‹Ú4îô‘XJŠ	£›‹¿¨F‹ÜÿÖC„S«ZPWu0K€ŠŒS2»š!iJSCÔèq8K¿p>¡ªÂ(B•hN­ˆoÀËe%$-„ñ¶õú?ûW4½ÑHãz›gÉ¼ìJts]1™`Ùò£ú^m„ó34,¡%z¢v,|‡¸’‚¾Ä3µi‹ G	AûæÓ×[fXiS1*“2Ñ âÚõ1P~†‹óþ L~‘µ<§Ê=b«i7­æ«i7
-Ív4*7N%Èê·QhÂµay`¾+á92P¸B~{K=t«‚b0½h[â³™½ï¹[\Ž=ð€(à?þ¯C|îîÃoCéù«e>‘¬ÜfÈ‹\Á¦ŒþEâxL2žc"Å€—îwÇGóˆ€&¬¤)šäzDèñ]ì.ã:±KBk˜3†Hü]sÄŽÉr£‡ú¸\ˆØ”¯L0Íò¨Þfq\Ü×-Š‹ß…ÁÅÃ ×ì¯¿64jÇ¯+p»‰Aº.dÂÀcÃ‘rT•ñ&M4G@¢M+O–¶ù+6ž¥zõ¾M´¢Ø¬Uôzÿ_@÷oþýÇ’÷ÿÍ–ýr¯xÿ×švkÏÞ©Þÿó÷ÿÇò'Âœò­ü—ã¦úTì¼<…M¡ zk÷)Ó¬Ò<xÒÄ¿0ó¯LýKsWMVws§ž¨Ââì+H7)~ì0{¯üH°·Òý"¯â %Sù$^¹×Ó~`.çðÉÿàúÁI@ÅíæüÏ&,S+§Úvþ~ÏÁó8ZxmkÎ³9aÆqÃÜ“íü]KèxX¢k°ï(µ¢åœ]0›·¢OýˆzðïÛ™w
-}ÛB?w]Ävwûgm»x_“Éøzñ[ÀŠ{@ÅÕˆžô2ùû 6MÈâ¯qôœ«€ùhäÅü¦¼­ÎßŠ*ª¨¢Š*ª¨¢Š*ª¨¢Š*ª¨¢Š*ª¨¢Š*ª¨¢Š*ª¨¢Š*ª¨¢Š*ª¨¢Š*ú3ô’ªcs P  
+‹ \½QíZéSãÆç³þŠ¶–âÈ[ùb1‰óØaÃUØ„l½MmÉÒØV4Š4Â8Çÿþºg4²lÌõö¨J=õ°ÇsôÝ¿©Z[ùâTGÚÙÙ¦ÿízñ¿¦•F³Qomoµê[¯p|§ÕÚZí•¯@i"ì`%°ãë‡æ=öû?”ªµÀ™Ë'á¶ÿö¶¶÷ÂÿF«¹³`ÿFãUk{ê_Óþ1çâ¡yýþ¥•ÚÀk;/NÐöÑ`0…ôw8fÎµñ¢ÇÞh,&ŒþÂáåc
+‹….LláŒ]>‚‰'ÆÐ;éí³XÀÇàŒÈ·bÃø¹{Ñ;:;ÝmlÕ›Ízck`8>C­Û¾oxCø¬nx.Xé&X!ƒ:üú=ˆ1ˆb/C0{NìE4Äivd’*ôã)¬'©ËA{ò:|M€ÝzÆÐ3Ô)°† ÅŒq;ÛóáW0ÔQ3†˜3æ`¾ød‰ÏX„,Ìï	^Œ‚L„Œ¹ 8x!z¡ïƒO#Ÿ‚Ë"T0%ðàžpŽÌ'ûšA’ÆE²Ly
+cû†á®7¶
+F]²8d	Cæ‡x€ÏÏ!{Ó ;ÖOM#×löÝšærk{€Æ*Ø*Mbi/'ýÜ+ö[²œnÜ·Y4Ž¶Ÿ±M·ßË64—¼`¶°MøÓÈ]É²‚d4à·`æaä%¨{ÿñØ)ËK@ŸM…ç{	š}À1¨Oý+tÎ`MŽô'8‡Ëˆ£A÷Ûà¡ÃÈ¸Co„^ànbP¢ 	e‡rjŸÝb±$±GŒO+y
+zœñÆ>T0ãh,c*®FÏ"
+cxü™Áõ“É¤ª8©:<\$Þ(DuJ¡l”–å¼Úzw(ä,R¾Œc’%WXÂ®Ä}s!æ¤×
+C~:ábö{Ê‘ Î\ À“t4Â!ôìD©Ð ›zxOqÅ0úë	ª?wÃßøÿ/O~Ý mÛ–?ü–zÎ4òHRcŸ‡è/mãmv¡Ñ	Þ¿}÷ÝÍ¬õŽâÑ·“ëñ·ÉÅxçÂiöoFÓ·Æ±œx<v®ZÍ¨ÓIÝ÷½Û¤3<¼ØŸöÞußýÖpÓ 8¶êÐªC³nü-­3à©xÔ×æ¸6~®®fI×„FÛ³íô
+¹ãBžeÈªN¦U2E.¸¾G62˜Ÿ0ú¦MBYVí/—›Ë-ßýŒ’ÖlKï;vgf¿/j`Ê’“Ugæ=Úil²?Æ*æÑ1ºÅ€¡Ñó\t”¡tvœ)¼0ee‹˜¡[æû`&°áêèø˜jÏQÁ‚b ÉåZô.ÊX^2&GÝËvzƒvkj»eEíXì÷B9›É&E]bÍS~Ÿ4’§\ÛÇLÎ\ôÚ½1çèßg?31ª>&/iô0­V«Îr¥*Fžl¦8¸gí¸D+¦rOÈ'±ì²¡ú‚B7JdžÈ…þÂùq·ÓëÂéY¿Û†ÎbîÀ”Jaï¡ô/q?üê`jC;ñ²€ŒÉý.º]øÆBDíZ’”È“TMÄSK}-šPô™§ló{p¹ÑÙÛ;»<íï®ndôÂ(RÊ¬îv©®Â{J—ŒÍÞÑ>„i0Àñóù¤ý³Ò)!É«eÛG6àhˆ(=ÿ Œ§	‹kÙäMÍûÖëµ4^¯5¡ùzmkó>ßË–íš«™L¦ÄEý³Ÿº§OOrÚIÅ˜Çž˜BŸ_³ðkË¶\4A¬ `R%ÖÁÅÙÉÓ–¹Øù˜#ú<}®ÕÔ‚äóË…@!@±Hm¬'ÉDQð¹ræ‚”¶&<õ]#×*eáOÌ˜$ÚˆoTÌ!M04±zË8Zˆ@të?vzë”hj»“¹órø³‘—ÈT%!E¥²	Ïô[Á¥e•ŽÏö:}j$žª†õaêûëàbºpÇF!²…LÛ¢ ¡»£6Ôh¼&x-¯ùÜ‘y·öl†õJd[³›YïÇ‹nïÇ³ãý§;æe.	
+b¼‰qÌ’1÷]bY:¥Ì¯™úuN°@ÿÒÖ"öÅhZ%ãQVúTµC,‡­AL>{ÙnÔëµ@á%&Oÿ®®À!Æ€Ì§‰±¨ÇÁ²A®T<—ü(¡Fû0lYÀy¤BH¹K–ìÕ
+Š;iL£Q-tI;<@=:ÈÃ´ò\ŸÑº"×ÑZWF@º!îdî,xIÌÕÌïMÃx¿,ªI2é)ËòÉ‘œF!m’ýòˆ‘¡™a	Æõ†Ù<íOÐ5VSô/úØ;®¢·ÒßqâQÒyöxL!ñF¡ƒí¬BFËÕ
+ÄÌ¾þ>"ÕÒ%Î¬b…ÝaŸ½¶¦•®æ†¤^&ÍÏ…Ÿ•‹VHñ—"ÕÜÊ¬šøúyº`ÎdxýÐtU„´lLÝ•â=8)‹Š]Œ*•eŸÙ$ÏEõ=ÌZ9EÕ._Ëp_c˜œà%›à9èÊþýÇ’ÓcD›å¾„ùè•³µd&UÏ(­œ¥%tc'æòÏ<È½^_!XŽ’
+ôxÀ@&^ô\æ»˜L±FÏ†X‰éKÝ7R‡ªšR{dËÁN˜	6ß¹Î¡ud–‚îŒÝì.4\ÎHCâ;’ è.N Áï´^Í»4å	z?,8hýåÇl.É‡=©ß¼éö²;ˆ!§z@)[ïð¦m«9/H|oÿ#%È{F-É¼|¹4sÃR¢^·ß?:=ì=±j)”Ïä¼fðÎ06¨4ZVâÄÓHÈ½–2\€	GþÁ:ƒ%p®ÑÚ;;E>.»¿{bmÊmb®jaÌ,ørMÎÓ‚±îj0×ÕÜðBkÏn#ŽÂž_~<éüò±sŒÀäãy÷b¯‹­Öþâ„Ë^÷cïýéÞÇ³·ïº{ýÞnÃ¨.MŽyV)ør>V³#Ïb·6K5GE/9þ˜[_²®nŠsqäŒûî<ºg•
+,žr¡0z¥¢±ìâ”Bû(Ó¾Q–\3	îÉÕ;þî¢ç`Ï9Q¥Rpñ¿çY—¼ŽBL,úÙÈ1³ª!%ÌÅ²ˆ-Ÿ1&ä5È®J[õ;·ÐW_ÉdXÁï´¨˜¥#ŽàC‚\=I2«>ît_·±pàÙOfu³Ù­‹c@£Éº¯,Gó¤228‚|Ñ
+ÍCjt åËŠXì[Ø!04éÆ›ï^ñøZƒ˜»›Zó¼g¬›«Ù$¬‘XŽ”FJ1?c´jE[p”rÞ>î”¡jæšZµyX ‡†ŽÀ]óùû-S¬Ò©UAû”Íé~ÛöÐ•~ó³^LºêHÚ5ŠºbûÙ¬7êVý•UoÔ2€›Ô4¢©!
+¯(œ‘Toß„†å‚yP€Hj¤ŸAõí-wÑ¬B‘ƒ)èMÛ
+¡›ÍôýÀµårXƒU%ï,ð³vñ¹/Í‡Þ†Âï¯—ÙDM%á\Tà=Ó2¥ÿ­Z2Š1b@ùþàèp¾êH4bÂ½ôMF3Œ G¤ßÖ¡ÑÄm;t˜oR!äx!5,×z¨§0Ñ‡l›êéƒ	¦YÕÇ,ŽË«ÀÅAy§¼0¸XÁ .ºýÝÕ7†nðë=-‰Nºª”dÂ_Á‹c/`K¨ÿ“MàJv€ÅÅÊÂzzGQªÈåÉNC&›•’>Óóÿ‹ngÿ¤[·âK>ÿoµ^ÝûþÇNk[=ÿÕhm7wèùÿÖÎ×~þÿúþÇ¬MS;¨Ð…º1JŽ>·é¡6<YOtãá·¶Q¸\/<«é%Iž]óó3j˜dû²÷S÷CÇ^˜ÞXHÔÓÆüxùÄp±ìA?fÈ<u'ãuÙ¢`>SW~ë³§{/óiúÒŠ:ÑËOr+ÆAêãI‚%ÿ¾Q}\Ð…%ÂÊN˜‚/XÙRÌ×Õ–Z1{ÔÌ]„c¿¦’×ÈN²Qþ®0 ¶48ÄA‰’z8ùIÚ,(Ã˜×¡?gUr§i,}ÿ§*ûÜ/üþÏ²øo6vZ:þ®´0þ›ÛôþWÿ_ùýŸ£¹ SÃ®D7¬Ùt
+’|d½Lµ¹ýœeVa<ká'¬ü”¥Ÿ´ö¾ÅÙÕå2•HIâÓB£çD³Ä–¿ÖÛ›Fáú»£«¾e( å{ÏzÞ{@æòù ûô'ÎtÿsïØãòáÆü[S–©…Ë*=Þ·±|om˜óÓl?¡M?uU²¾«	½-š+Uá¢@Þ/‘gÏ—LÙ[¢MÇwá_·3ëäöú,º…^ê8ØÝUîÿªÛÅëÚD0”Õ1/—z6ÖnºÕ‹^ê‚]¨ÑùËxzÍÕ\‘VcJü]RI%•TRI%•TRI%•TRI%•TRI%•TRI%•TRI%•TRI%•TRIŸBÿŒ22Î P  
