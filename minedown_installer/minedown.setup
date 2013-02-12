@@ -1,0 +1,48 @@
+#!/bin/bash
+#Installer for MineDown
+clear all
+echo ""
+echo "Installing MineDown"
+sleep .25
+clear all
+echo ""
+echo "Installing MineDown-"
+sleep .25 
+clear all
+echo ""
+echo "Installing MineDown--"
+sleep .25 
+clear all
+echo ""
+echo "Installing MineDown---"
+sleep .25 
+clear all
+echo ""
+echo "Installing MineDown----"
+sleep .25 
+clear all
+echo ""
+echo "Installing MineDown-----"
+sleep .25 
+clear all
+touch /tmp/minedown.error.log
+response=$(cp minedown /usr/bin/  2>&1)
+  if [ $? -gt 0 ]; then 
+echo "$response" > /tmp/minedown.error.log
+echo "########################################"
+echo "############### ERROR!! ################"
+echo "########################################"
+echo "PiLio failed to install -" 
+echo "please contact mark@juicypi.com"
+echo "please also include the minedown.error.log"
+echo "which is located in your /tmp directory"
+else 
+chmod +x /usr/bin/minedown 
+echo "########################################"
+echo "############## Success!! ###############"
+echo "########################################"
+echo "MineDown is now successfully installed"
+echo "To run MineDown, simply type 'sudo minedown'"
+echo "Without the ''"
+fi
+
