@@ -208,7 +208,7 @@ or Choose OK to CONTINUE..." 20 60 3>&1 1>&2 2>&3)
 
 if [ $? -eq 0 ]; then
 settings=$SETTINGS
-echo "settings=\"$settings\"" > /bin/.cgsettings.conf
+echo "settings=$settings" > /bin/.cgsettings.conf
 do_startwatchdog
 fi
 }
@@ -216,6 +216,7 @@ fi
 do_startwatchdog() {
 clear all
 export GPU_MAX_ALLOC_PERCENT=100
+export GPU_USE_SYNC_OBJECTS=1
 . /bin/.minedown.conf
 cd $location
 if [ ! -f $location/api-example.php ]; then
@@ -232,7 +233,9 @@ NOTE: api-example.php is required and must be located in the same folder as cgmi
 }
 do_startminer() {
 gnome-terminal -e "./cgminer $settings --api-listen" & 
-sleep 10
+sleep 60
+clear all
+echo "Watchdog Started"
 while (true); do
 response=$(php api-example.php > /tmp/cgtmp.log )
 if [ $? -eq 0 ]; then
