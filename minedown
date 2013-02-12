@@ -207,7 +207,7 @@ SETTINGS=$(whiptail --inputbox "Please Enter your cgminer start settings below:
 or Choose OK to CONTINUE..." 20 60 3>&1 1>&2 2>&3)
 
 if [ $? -eq 0 ]; then
-settings=$SETTINGS
+settings="$SETTINGS"
 echo "settings=$settings" > /bin/.cgsettings.conf
 do_startwatchdog
 fi
