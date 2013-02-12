@@ -1,0 +1,4 @@
+Version-12022013 - Fixed some minor bugs affecting new installs when no
+configuration files were found.
+
+Version-11022013 - Initial Commit.
