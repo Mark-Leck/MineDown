@@ -1,3 +1,5 @@
+Standalone installer now updated to Version-13022013b
+
 Version-13022013b - cgminer save start settings was still causing issues due to the way $strings were being processed.
 I have finally fixed this issue at last! :) I will rebuild the installer again with this script.
 
