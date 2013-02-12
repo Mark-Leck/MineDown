@@ -1,3 +1,5 @@
+Standalone installer now added.
+
 Version-12022013 - Fixed some minor bugs affecting new installs when no
 configuration files were found.
 
