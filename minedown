@@ -191,7 +191,7 @@ fi
 do_watchdog2() {
 whiptail --yesno "Start cgminer with the following settings?:
 
-$settings " 20 60 20
+"$settings" " 20 60 20
 if [ $? -eq 0 ]; then
 do_startwatchdog
 else
