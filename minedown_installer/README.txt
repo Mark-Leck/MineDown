@@ -11,7 +11,7 @@ Fully tested * confirmed working on Ubuntu 12.10
 Full install code (simply copy and paste the code below into terminal)
 
 sudo su
-wget http://www.juicypi.com/downloads/minedown/minedown_installer/minedown.sh
+wget https://github.com/Mark-Leck/MineDown/raw/master/minedown_installer/minedown.sh
 sh minedown.sh
 minedown
 echo "done"
