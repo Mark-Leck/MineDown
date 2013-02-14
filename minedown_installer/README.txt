@@ -1,4 +1,4 @@
-Version - 14022013
+Version - 14022013b
 
 Note: The standalone installer is updated 'after' the main minedown source so may not always contain the latest source 
 to confirm/deny this please check the CHANGELOG here: https://github.com/Mark-Leck/MineDown/blob/master/CHANGELOG
