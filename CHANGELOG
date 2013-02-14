@@ -1,3 +1,5 @@
+Standalone installer now updated to reflect Version-14022013 changes
+
 version-14022013 - simplified the dependency checking part of the script so it wasn't so distro specific.
 
 Standalone installer now updated to Version-13022013b
