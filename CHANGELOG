@@ -1,3 +1,5 @@
+version-14022013 - simplified the dependency checking part of the script so it wasn't so distro specific.
+
 Standalone installer now updated to Version-13022013b
 
 Version-13022013b - cgminer save start settings was still causing issues due to the way $strings were being processed.
