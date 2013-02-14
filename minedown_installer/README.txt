@@ -1,4 +1,7 @@
-Version - 13022013b
+Version - 14022013
+
+Note: The standalone installer is updated 'after' the main minedown source so may not always contain the latest source 
+to confirm/deny this please check the CHANGELOG here: https://github.com/Mark-Leck/MineDown/blob/master/CHANGELOG
 
 MineDown installer for direct download site please visit:
 http://www.juicypi.com/downloads/minedown/minedown_installer/
