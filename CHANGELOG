@@ -1,3 +1,5 @@
+Standalone installer now updated to reflect Version-14022013b changes
+
 Version-14022013b - new 'Configuration' sub-menu now added, user can now run the whole setup wizard again or choose to set 
 the watchdog trigger threshold & configure cgminers' start settings all independently.
 
