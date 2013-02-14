@@ -8,9 +8,11 @@ if [ $(id -u) -ne 0 ]; then
  printf "Script must be run as root. Try 'sudo minedown' \n"
   exit 1
 fi
+DEPS="whiptail php5 curl"
+for i in $DEPS; do
+which $i > /dev/null
+    if [ $? -ne 0 ]; then
 
-if [ ! -f /bin/whiptail ] 
- then
 clear all
 echo "####################################################################"
 sleep 1
@@ -20,20 +22,11 @@ echo "#### Please make sure that you have a valid internet connection! ###"
 sleep 1
 echo "####################################################################"
 sleep 2
- apt-get update
- apt-get -y install whiptail
- fi
-if [ ! -f /usr/bin/curl ]; then
+
 apt-get update
-apt-get -y install curl 
-
- fi
-if [ ! -f /usr/bin/php5 ]; then
-apt-get update
-apt-get -y install php5-cli 
-
- fi
-
+apt-get -y install "$i"
+        fi
+done
 
 do_Readme() {
 whiptail --msgbox "MineDown is a lightweight GUI front-end watchdog for cgminer, it utilises both the cgminer API & the Twilio SMS API and (once configured) will send an SMS Text message to alert you of a problem with your miner.
