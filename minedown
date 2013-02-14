@@ -2,7 +2,7 @@
 #MineDown by Mark Leck
 #A Lightweight GUI front-end watchdog with SMS alert for cgminer
 
-VERSION=14022013
+VERSION=14022013b
 clear all
 if [ $(id -u) -ne 0 ]; then
  printf "Script must be run as root. Try 'sudo minedown' \n"
@@ -126,7 +126,9 @@ THRESHOLD=$(whiptail --inputbox "Please Enter Your U: Utility threshold:
 
 This will be the watchdogs main fail trigger...
 
-Eg: If you currently average U:100/m then enter 90 to allow for slight dips, should the watchdog sense a sudden drop below this setting then an SMS
+Eg: Although trial & error I suggest to start by entering a figure about 70% of your current U value, so if your current value is 50 then enter 35 or 100 then enter 70.
+
+Should the watchdog sense a sudden drop below this setting then an SMS
 warning message will be sent automatically!" 20 60 3>&1 1>&2 2>&3)
 
 if [ $? -eq 0 ]; then
@@ -146,7 +148,7 @@ The Mobile you wish to alert is: "$to"
 
 The location of cgminer is: "$location"
 
-Your Utility threshold is: "$threshold"
+Your Utility trigger threshold is: "$threshold"
 
 Is This Correct?..." 25 60 20
         if [ $? -eq 0 ]; then
@@ -156,14 +158,13 @@ Is This Correct?..." 25 60 20
     done
 
 if [ -n "$account" ] && [ -n "$token" ] && [ -n "$from" ] && [ -n "$to" ] && [ -n "$location" ] && [ -n "$threshold" ]; then
-touch /bin/.minedown.conf
 echo "from=$from" > /bin/.minedown.conf
 echo "account=$account" >> /bin/.minedown.conf
 echo "token=$token" >> /bin/.minedown.conf
 echo "to=$to" >> /bin/.minedown.conf
 echo "message=MineDown!!MineDown!!MineDown!!" >> /bin/.minedown.conf
 echo "location=$location" >> /bin/.minedown.conf
-echo "threshold=$threshold" >> /bin/.minedown.conf 
+echo "threshold=$threshold" > /bin/.threshold.conf 
 whiptail --msgbox "All done, MineDown is now configured and ready to use!
 
 Please select MineDown from the main menu to start the watchdog..." 20 60 20
@@ -189,6 +190,7 @@ $settings " 20 60 20
 if [ $? -eq 0 ]; then
 do_startwatchdog
 else
+entry=0
 do_ammendcgstart
 fi
 }
@@ -198,12 +200,24 @@ SETTINGS=$(whiptail --inputbox "Please Enter your cgminer start settings below:
 
 (Eg: --scrypt --intensity, etc, etc)
 
-or Choose OK to CONTINUE..." 20 60 3>&1 1>&2 2>&3)
+Choose OK to CONTINUE..." 20 60 3>&1 1>&2 2>&3)
 
 if [ $? -eq 0 ]; then
 settings="$SETTINGS"
 echo "$settings" > /bin/.cgsettings.conf
+do_ammendstep2
+fi
+}
+
+do_ammendstep2() {
+if [ "$entry" -eq 0 ]; then
 do_startwatchdog
+else
+whiptail --msgbox "Your new cgminer start settings:
+
+$settings
+
+Have been updated successfully...." 20 60 20
 fi
 }
 
@@ -211,6 +225,7 @@ do_startwatchdog() {
 clear all
 export GPU_MAX_ALLOC_PERCENT=100
 export GPU_USE_SYNC_OBJECTS=1
+. /bin/.threshold.conf
 . /bin/.minedown.conf
 cd $location
 if [ ! -f $location/api-example.php ]; then
@@ -227,7 +242,7 @@ NOTE: api-example.php is required and must be located in the same folder as cgmi
 }
 do_startminer() {
 gnome-terminal -e "./cgminer $settings --api-listen" & 
-sleep 60
+sleep 120
 clear all
 echo "Watchdog Started"
 while (true); do
@@ -274,12 +289,69 @@ echo "curl: $crl" >> /tmp/minedown.log
 break;
 }
 
+do_Run_Setup_Wizard() {
+do_Setup
+}
+
+do_Set_Trigger_Threshold() {
+if [ -f /bin/.threshold.conf ]; then
+. /bin/.threshold.conf
+fi
+if [ -n "$threshold" ]; then
+thresh=$threshold
+fi
+while (true); do
+THRESHOLD=$(whiptail --inputbox "Please Enter Your U: Utility threshold value: 
+
+This will be the watchdogs main fail trigger...
+
+Eg: Although trial & error I suggest to start by entering a figure about 70% of your current U value, so if your current value is 50 then enter 35 or 100 then enter 70.
+
+Should the watchdog sense a sudden drop below this setting then an SMS
+warning message will be sent automatically!" 20 60 $thresh 3>&1 1>&2 2>&3)
+
+if [ $? -eq 0 ]; then
+threshold="$THRESHOLD"
+fi
+
+whiptail --yesno "Your new Utility trigger threshold is: $threshold
+
+Is this correct? " 20 60 20
+
+if [ $? -eq 0 ];then
+echo "threshold=$threshold" > /bin/.threshold.conf
+break;
+fi
+done
+}
+
+do_Ammend_cgminer_Start_Settings() {
+entry=1
+do_ammendcgstart
+}
+
+do_Configuration() {
+while true; do
+  CONFIG=$(whiptail --menu "                     ***** MineDown Configuration ****" 20 80 12 --cancel-button Main-Menu --ok-button Select \
+        "Run_Setup_Wizard" "" \
+	"Ammend_cgminer_Start_Settings" "" \
+	"Set_Trigger_Threshold" "" \
+        3>&1 1>&2 2>&3)
+  RET=$?
+  if [ $RET -eq 0 ]; then
+        "do_$CONFIG" || whiptail --msgbox "There was an error running do_$CONFIG" 20 60 1
+  else
+  break;
+fi
+done
+}
+
 
 while true; do
   CONFIG=$(whiptail --menu "                          ******** MineDown ********" 20 80 12 --cancel-button Finish --ok-button Select \
         "Readme" "" \
         "MineDown" "" \
-        "Setup" "" \
+        "Configuration" "" \
         "About" "" \
         3>&1 1>&2 2>&3)
   RET=$?
@@ -289,3 +361,4 @@ while true; do
         exit 1
   fi
 done
+
